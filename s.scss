@@ -1,0 +1,70 @@
+@import 'bower_components/normalize-css/normalize.css';
+@import '_vars';
+@import '_mixins';
+
+* {
+    -webkit-box-sizing: border-box;
+       -moz-box-sizing: border-box;
+            box-sizing: border-box;
+}
+
+body{
+    font: 100% / 1.5 sans-serif;   
+}
+
+header,main,footer{
+    margin: 0 auto;
+    width:60%; 
+}
+header{
+    margin-top:2em;
+}
+h1{
+    margin: 0;
+}
+form{
+    margin: 2em auto;
+    font-size: 1.2rem;
+}
+input{
+    line-height: 1;
+    
+    &[type=date],
+    &[type=text] {
+        font:inherit; 
+        display: block;
+        width:100%;
+        border: 1px solid $darkBorder;
+        box-shadow: none;
+        padding: .1rem .25rem;
+        
+        @include focus;  
+    } 
+}
+button{
+    background: $button;
+    border: 1px solid $button;
+    color: $light;
+    
+    &:hover{
+        background: $focus;
+        border-color: $focus;
+    }
+    @include focus;
+}
+label{
+    font-weight: bold;
+    display: block
+}
+
+.informative{
+    font-size: .8rem;
+}
+output{
+    display: block;
+    font:inherit;
+    background: $hilight;
+    border: 1px solid $hilightBorder; 
+    padding: 1em;
+    width: 100%
+}

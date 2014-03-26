@@ -1,0 +1,21 @@
+@mixin focus{
+    &:focus {
+        outline: none;
+        border-color: $focus;
+        box-shadow: 0 0 3px $focus;
+    }
+    
+    &:focus::-webkit-input-placeholder{
+        color: transparent;
+    }
+    &:focus::-moz-placeholder { 
+        color: transparent;  
+    }
+
+    &:focus:-ms-input-placeholder {  
+        color: transparent;
+    }
+    &:focus:input-placeholder {  
+        color: transparent;
+    }
+}
