@@ -1,0 +1,79 @@
+@import url(../bower_components/normalize-css/normalize.css);
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box; }
+
+body {
+  font: 100% / 1.5 sans-serif; }
+
+header, main, footer {
+  margin: 0 auto;
+  width: 60%; }
+
+header {
+  margin-top: 2em; }
+
+h1 {
+  margin: 0; }
+
+form {
+  margin: 2em auto;
+  font-size: 1.2rem; }
+
+input {
+  line-height: 1; }
+  input[type=date], input[type=datetime], input[type=datetime-local], input[type=text] {
+    font: inherit;
+    display: block;
+    width: 100%;
+    border: 1px solid #666666;
+    box-shadow: none;
+    padding: .1rem .25rem; }
+    input[type=date]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=text]:focus {
+      outline: none;
+      border-color: #ff0033;
+      box-shadow: 0 0 3px #ff0033; }
+    input[type=date]:focus::-webkit-input-placeholder, input[type=datetime]:focus::-webkit-input-placeholder, input[type=datetime-local]:focus::-webkit-input-placeholder, input[type=text]:focus::-webkit-input-placeholder {
+      color: transparent; }
+    input[type=date]:focus::-moz-placeholder, input[type=datetime]:focus::-moz-placeholder, input[type=datetime-local]:focus::-moz-placeholder, input[type=text]:focus::-moz-placeholder {
+      color: transparent; }
+    input[type=date]:focus:-ms-input-placeholder, input[type=datetime]:focus:-ms-input-placeholder, input[type=datetime-local]:focus:-ms-input-placeholder, input[type=text]:focus:-ms-input-placeholder {
+      color: transparent; }
+    input[type=date]:focus:input-placeholder, input[type=datetime]:focus:input-placeholder, input[type=datetime-local]:focus:input-placeholder, input[type=text]:focus:input-placeholder {
+      color: transparent; }
+
+button {
+  background: #339999;
+  border: 1px solid #339999;
+  color: white; }
+  button:hover {
+    background: #ff0033;
+    border-color: #ff0033; }
+  button:focus {
+    outline: none;
+    border-color: #ff0033;
+    box-shadow: 0 0 3px #ff0033; }
+  button:focus::-webkit-input-placeholder {
+    color: transparent; }
+  button:focus::-moz-placeholder {
+    color: transparent; }
+  button:focus:-ms-input-placeholder {
+    color: transparent; }
+  button:focus:input-placeholder {
+    color: transparent; }
+
+label {
+  font-weight: bold;
+  display: block; }
+
+.informative {
+  font-size: .8rem; }
+
+output {
+  display: block;
+  font: inherit;
+  background: #ffffcc;
+  border: 1px solid #fff100;
+  padding: 1em;
+  width: 100%; }

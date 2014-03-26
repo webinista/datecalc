@@ -1,4 +1,4 @@
-@import 'bower_components/normalize-css/normalize.css';
+@import '../bower_components/normalize-css/normalize.css';
 @import '_vars';
 @import '_mixins';
 
@@ -30,6 +30,8 @@ input{
     line-height: 1;
     
     &[type=date],
+    &[type=datetime],
+    &[type=datetime-local],
     &[type=text] {
         font:inherit; 
         display: block;
