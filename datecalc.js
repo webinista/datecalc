@@ -29,23 +29,20 @@ function zeroPadLeft(input, length){
     return padded.substr(extract);
 }
 
-function setNow(updateField){
-    var now = new Date(), date = [], time = [];
-    date[0] = now.getFullYear();
-    date[1] = now.getMonth();
-    date[2] = now.getDate();
-    
-    time[0] = now.getHours();
-    time[1] = now.getMinutes();
-    time[2] = now.getSeconds();
-    
-    var d = date.join('-');
-    var t = time.join(':');
-    
-    console.log( d + 'T' + t);
+function setToday(updateField){
+    if( updateField.type == 'text'){
+        var d, now = new Date(), date = [];
+        
+        date[0] = zeroPadLeft( 1 + now.getMonth() );
+        date[1] = zeroPadLeft( now.getDate() );
+        date[2] = now.getFullYear();
+        
+        d = date.join('/');
+        updateField.value = d;
+    } else {
+        
+        updateField.valueAsNumber = new Date();
+    }
 }
-// setNow();
 
-console.log( zeroPadLeft(98, 3) );
-
-//start.value = '2013-01-01T01:01:00';
+setToday(startdate);
