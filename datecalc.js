@@ -71,7 +71,7 @@ function setToday (updateField) {
 }
 
 function parseDateUnit (value) {
-   return value.split(' ')[1];
+   return value.toLowerCase.split(' ')[1];
 }
 
 function parseNumber (value) {
@@ -115,6 +115,11 @@ function calculateDate (inputDate, difference) {
     num  = parseNumber(difference);
     unit = parseDateUnit(difference);
     
+    if(isNaN(num) || unit === undefined ){
+        throw new TypeError('Please enter a number and unit of measure, for example "3 weeks."');
+    } 
+   
+    
     /* Test for and force a plural. */
     if( unit.indexOf('s') < 0 ){
         unit += 's';
@@ -129,6 +134,13 @@ function calculateDate (inputDate, difference) {
     Units.seconds   =  input.getUTCSeconds();
     Units.milliseconds  =  input.getUTCMilliseconds();
     
+    /* 
+    TO DO:
+    Input of '9000 seconds' fails.
+    Seconds bug is about type. We always have 0 seconds.
+    So how to convert this so that it's true or false, not
+    truthy or falsy?
+    */
     if(Units[unit]){
         if ( /week/.test(unit) ) {           
             /* Multiply week "constant" by number of them */
@@ -155,6 +167,10 @@ datecalc.addEventListener('submit', function(e){
     
     result.value = formatDate(future).local;
 });
+
+window.onerror = function(e){
+    alert(e);   
+}
 
 window.addEventListener('DOMContentLoaded', function(e){
     setToday(startdate);
