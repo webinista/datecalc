@@ -19,6 +19,11 @@ header,main,footer{
 header{
     margin-top:2em;
 }
+footer{
+    margin-bottom: 3em;
+    font-size: .8rem;
+    text-align: right
+}
 h1{
     margin: 0;
 }
@@ -51,6 +56,10 @@ button{
     &:hover{
         background: $focus;
         border-color: $focus;
+    }
+    &[type=reset]{
+        background-color: $reset;
+        border-color: $reset;
     }
     @include focus;
 }

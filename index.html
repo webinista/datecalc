@@ -11,15 +11,15 @@
         <h1>Date calculator</h1>
     </header>
 	<main>
-		<form>
+		<form id="datecalc">
             <p>
                 <label for="startdate">Enter a date</label>
                 <input type="date" id="startdate" name="startdate">
             </p>
             <p>
                 <label for="difference">Add or subtract</label>
-                <input type="text" id="difference" name="difference" placeholder="+30 days">
-                <span class="informative">Example: +30 days, -20 years</span>
+                <input type="text" id="difference" name="difference" placeholder="example: +30 days" value="" required>
+                <span class="informative">Example: 5 days, +30 days, -20 years</span>
             </p>
             <p>
                 <button type="submit">Calculate</button>
@@ -29,7 +29,12 @@
             </p>
         </form>
 	</main>
-	<footer></footer>
+	<footer>
+    <p>
+        &copy; 2014 <a href="http://tiffanybbrown.com/">Tiffany B. Brown</a> and <a href="http://webinista.com/">Webinista, Inc.</a>. Released under an <a href="./LICENSE">MIT license</a>.
+    </p>
+    </footer>
+    </footer>
 <script src="datecalc.js"></script>
 </body>
 </html>
