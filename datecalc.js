@@ -1,4 +1,5 @@
 /* 
+DateCalc.js: A simple script for doing date math.
 
 Copyright (c) 2014 Tiffany Brown and Webinista, Inc. <http://www.webinista.com/>
 
@@ -22,6 +23,12 @@ SOFTWARE.
 
 */
 
+/* 
+TO DOs:
+ - Make it into a reusable class.
+ - Attempt to fix start date so that it's local time, not UTC.
+ - Add error display. 
+*/
 var start, result, difference, datecalc;
 
 start  = document.getElementById('startdate');
