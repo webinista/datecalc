@@ -71,7 +71,7 @@ function setToday (updateField) {
 }
 
 function parseDateUnit (value) {
-   return value.toLowerCase.split(' ')[1];
+   return value.toLowerCase().split(' ')[1];
 }
 
 function parseNumber (value) {
