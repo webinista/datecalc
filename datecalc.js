@@ -142,14 +142,14 @@ calculateDate = function (inputDate, difference) {
     So how to convert this so that it's true or false, not
     truthy or falsy?
     */
-    if(Units[unit]){
+    if (Units[unit] !== undefined) {
         if ( /week/.test(unit) ) {           
             /* Multiply week "constant" by number of them */
             wks = Units.weeks * num;          
             Units.seconds = Units.seconds + wks;
         } else {
             Units[unit] = Units[unit] + num; 
-        }      
+        } 
     } else {
         throw new TypeError('Units must be year(s), month(s), week(s), day(s), hour(s), minute(s), or second(s), for example: -3 weeks.');  
     }
