@@ -30,6 +30,7 @@ TO DOs:
  - Add error display. 
 */
 var start, result, difference, datecalc;
+var setToday, parseDateUnit, parseNumber, formatDate, calculateDate;
 
 start  = document.getElementById('startdate');
 result = document.getElementById('result');
@@ -55,7 +56,7 @@ function zeroPadLeft(input, length){
     return padded.substr(extract);
 }
 
-function setToday (updateField) {
+setToday = function (updateField) {
     if( updateField.type == 'text'){
         var d, now = new Date(), date = [];
         
@@ -70,15 +71,15 @@ function setToday (updateField) {
     }
 }
 
-function parseDateUnit (value) {
+parseDateUnit = function (value) {
    return value.toLowerCase().split(' ')[1];
 }
 
-function parseNumber (value) {
+parseNumber = function (value) {
    return parseInt(value, 10);
 }
 
-function formatDate (dateObjOrTimestamp) {
+formatDate = function (dateObjOrTimestamp) {
     var days, months, local = [], utc = [];
     /* 
      TO DO: 
@@ -88,7 +89,7 @@ function formatDate (dateObjOrTimestamp) {
     days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
     months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
         
-    if (Object.prototype.toString.call(dateObjOrTimestamp) !== '[object Date]') {
+    if (Object.prototype.toString.call(dateObjOrTimestamp) !== '[object Date]'){
         dateObjOrTimestamp = new Date(dateObjOrTimestamp);
     }
     local[0] = days[dateObjOrTimestamp.getDay()]+',';
@@ -107,7 +108,7 @@ function formatDate (dateObjOrTimestamp) {
     };
 }
 
-function calculateDate (inputDate, difference) {
+calculateDate = function (inputDate, difference) {
     var input, diff, num, unit, wks, d, Units = {};
     
     input = new Date(inputDate);
@@ -115,13 +116,13 @@ function calculateDate (inputDate, difference) {
     num  = parseNumber(difference);
     unit = parseDateUnit(difference);
     
-    if(isNaN(num) || unit === undefined ){
+    if (isNaN(num) || unit === undefined) {
         throw new TypeError('Please enter a number and unit of measure, for example "3 weeks."');
     } 
    
     
     /* Test for and force a plural. */
-    if( unit.indexOf('s') < 0 ){
+    if (unit.indexOf('s') < 0) {
         unit += 's';
     }
     
@@ -168,9 +169,7 @@ datecalc.addEventListener('submit', function(e){
     result.value = formatDate(future).local;
 });
 
-window.onerror = function(e){
-    alert(e);   
-}
+
 
 window.addEventListener('DOMContentLoaded', function(e){
     setToday(startdate);
