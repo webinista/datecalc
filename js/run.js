@@ -23,9 +23,6 @@ addEvent(datecalc, 'submit', function(e){
     today = !!startdate.valueAsNumber ? startdate.valueAsNumber : startdate.value;
         
     future = DCO.calculateDate(today, difference.value);
-    
-    console.log(DCO.formatDate(future).local);
-    
     result.innerHTML = DCO.formatDate(future).local;
 });
 
