@@ -58,7 +58,8 @@ DateCalc.prototype.parseDateUnit = function (value) {
 
 DateCalc.prototype.parseNumber = function (string) {
 	/* Using this instead of parseInt to accomodate floats */
-	return +string.match(/[\-\.0-9]/g).join('');
+	console.log(string);
+	// return +string.match(/[\-\.0-9]/g).join('');
 }
 
 DateCalc.prototype.formatDate = function (dateObjOrTimestamp) {
@@ -90,13 +91,16 @@ DateCalc.prototype.formatDate = function (dateObjOrTimestamp) {
     };
 }
 
+/* Does the heavy lifting */
 DateCalc.prototype.calculateDate = function (inputDate, difference) {
     var input, diff, num, unit, wks, d, Units = {};
     
-    try {
-    	input = new Date(inputDate);
-    } catch (e) {
-    	console.log(e);
+	input = new Date(inputDate);
+    console.log(input);
+    
+    if(input == 'Invalid Date' || isNaN(input) === true) {
+    	throw new TypeError('Please enter a valid date.');
+    	return;
     }
     
     num  = this.parseNumber(difference);

@@ -1,15 +1,25 @@
-var start, result, difference, datecalc, DCO = new DateCalc();
+var startdate, result, difference, datecalc, DCO = new DateCalc();
 
-start  = document.getElementById('startdate');
+startdate  = document.getElementById('startdate');
 result = document.getElementById('result');
 difference = document.getElementById('difference');
 datecalc = document.getElementById('datecalc');
 
-
-datecalc.addEventListener('submit', function(e){
+var addEvent = function(obj, evt, method){
+	if(window.attachEvent) {
+		obj.attachEvent('on'+evt, method);
+	} else {
+		obj.addEventListener(evt, method, false);
+	}
+}
+ 
+addEvent(datecalc, 'submit', function(e){
     var today, future;
-    e.preventDefault();
-    
+    if( e.preventDefault){
+    	e.preventDefault();
+    } else {
+    	e.returnValue = false;
+    }
     today = !!startdate.valueAsNumber ? startdate.valueAsNumber : startdate.value;
         
     future = DCO.calculateDate(today, difference.value);
@@ -17,8 +27,7 @@ datecalc.addEventListener('submit', function(e){
     result.value = DCO.formatDate(future).local;
 });
 
-window.addEventListener('DOMContentLoaded', function(e){
-	
+addEvent(window, 'load', function(e){
     setToday(startdate);
 });
 
@@ -36,3 +45,4 @@ setToday = function (updateField) {
         updateField.valueAsNumber = Date.now();
     }
 }
+
