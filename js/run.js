@@ -1,12 +1,10 @@
-var start, result, difference, datecalc;
-var setToday, parseDateUnit, parseNumber, formatDate, calculateDate;
+var start, result, difference, datecalc, DCO = new DateCalc();
 
 start  = document.getElementById('startdate');
 result = document.getElementById('result');
 difference = document.getElementById('difference');
 datecalc = document.getElementById('datecalc');
 
-var DateCalc = new DateCalc();
 
 datecalc.addEventListener('submit', function(e){
     var today, future;
@@ -14,21 +12,22 @@ datecalc.addEventListener('submit', function(e){
     
     today = !!startdate.valueAsNumber ? startdate.valueAsNumber : startdate.value;
         
-    future = DateCalc.calculateDate(today, difference.value);
+    future = DCO.calculateDate(today, difference.value);
     
-    result.value = DateCalc.formatDate(future).local;
+    result.value = DCO.formatDate(future).local;
 });
 
 window.addEventListener('DOMContentLoaded', function(e){
+	
     setToday(startdate);
 });
 
 setToday = function (updateField) {
     if( updateField.type == 'text'){
-        var d, now = new Date(), date = [];
+        var d, now = new Date(), date = []; 
         
-        date[0] = zeroPadLeft( 1 + now.getMonth() );
-        date[1] = zeroPadLeft( now.getDate() );
+        date[0] = DCO.zeroPadLeft( 1 + now.getMonth() );
+        date[1] = DCO.zeroPadLeft( now.getDate() );
         date[2] = now.getFullYear();
         
         d = date.join('/');

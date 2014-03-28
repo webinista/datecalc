@@ -33,7 +33,7 @@ TO DOs:
 
 var DateCalc = function(){}
 
-DateCalc.prototype._zeroPadLeft = function(input, length){
+DateCalc.prototype.zeroPadLeft = function(input, length){
     var zero = '0', pad = '', len, padded, inp, extract;
     
     /* Convert to string */
