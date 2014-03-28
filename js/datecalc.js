@@ -28,16 +28,12 @@ TO DOs:
  - Make it into a reusable class.
  - Attempt to fix start date so that it's local time, not UTC.
  - Add error display. 
+ - Make this work in IE8.
 */
-var start, result, difference, datecalc;
-var setToday, parseDateUnit, parseNumber, formatDate, calculateDate;
 
-start  = document.getElementById('startdate');
-result = document.getElementById('result');
-difference = document.getElementById('difference');
-datecalc = document.getElementById('datecalc');
+var DateCalc = function(){}
 
-function zeroPadLeft(input, length){
+DateCalc.prototype._zeroPadLeft = function(input, length){
     var zero = '0', pad = '', len, padded, inp, extract;
     
     /* Convert to string */
@@ -56,30 +52,16 @@ function zeroPadLeft(input, length){
     return padded.substr(extract);
 }
 
-setToday = function (updateField) {
-    if( updateField.type == 'text'){
-        var d, now = new Date(), date = [];
-        
-        date[0] = zeroPadLeft( 1 + now.getMonth() );
-        date[1] = zeroPadLeft( now.getDate() );
-        date[2] = now.getFullYear();
-        
-        d = date.join('/');
-        updateField.value = d;
-    } else {    
-        updateField.valueAsNumber = Date.now();
-    }
-}
-
-parseDateUnit = function (value) {
+DateCalc.prototype.parseDateUnit = function (value) {
    return value.toLowerCase().split(' ')[1];
 }
 
-parseNumber = function (value) {
-   return parseInt(value, 10);
+DateCalc.prototype.parseNumber = function (string) {
+	console.log(string)
+   return parseInt(string, 10);
 }
 
-formatDate = function (dateObjOrTimestamp) {
+DateCalc.prototype.formatDate = function (dateObjOrTimestamp) {
     var days, months, local = [], utc = [];
     /* 
      TO DO: 
@@ -108,13 +90,17 @@ formatDate = function (dateObjOrTimestamp) {
     };
 }
 
-calculateDate = function (inputDate, difference) {
+DateCalc.prototype.calculateDate = function (inputDate, difference) {
     var input, diff, num, unit, wks, d, Units = {};
     
-    input = new Date(inputDate);
+    try {
+    	input = new Date(inputDate);
+    } catch (e) {
     
-    num  = parseNumber(difference);
-    unit = parseDateUnit(difference);
+    }
+    
+    num  = this.parseNumber(difference);
+    unit = this.parseDateUnit(difference);
     
     if (isNaN(num) || unit === undefined) {
         throw new TypeError('Please enter a number and unit of measure, for example "3 weeks."');
@@ -156,24 +142,7 @@ calculateDate = function (inputDate, difference) {
     
     d = new Date(Units.years, Units.months, Units.days, Units.hours, Units.minutes, Units.seconds, Units.milliseconds);
     return d.getTime();
-  }
-
-datecalc.addEventListener('submit', function(e){
-    var today, future;
-    e.preventDefault();
-    
-    today = !!startdate.valueAsNumber ? startdate.valueAsNumber : startdate.value;
-        
-    future = calculateDate(today, difference.value);
-    
-    result.value = formatDate(future).local;
-});
-
-
-
-window.addEventListener('DOMContentLoaded', function(e){
-    setToday(startdate);
-});
+}
 
 
 
