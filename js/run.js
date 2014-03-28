@@ -34,9 +34,9 @@ addEvent(window, 'load', function(e){
 });
 
 setToday = function (updateField) {
+	var d, now = new Date(), date = []; 
     if( updateField.type == 'text'){
-        var d, now = new Date(), date = []; 
-        
+    
         date[0] = DCO.zeroPadLeft( 1 + now.getMonth() );
         date[1] = DCO.zeroPadLeft( now.getDate() );
         date[2] = now.getFullYear();
@@ -44,7 +44,8 @@ setToday = function (updateField) {
         d = date.join('/');
         updateField.value = d;
     } else {    
-        updateField.valueAsNumber = Date.now();
+    	/* Doing all of this here because we want the date to be local to the user, not UTC */
+        updateField.valueAsNumber = new Date( now.setHours( now.getHours() - now.getTimezoneOffset()/60 ) );
     }
 }
 
