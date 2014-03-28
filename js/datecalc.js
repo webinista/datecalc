@@ -57,8 +57,8 @@ DateCalc.prototype.parseDateUnit = function (value) {
 }
 
 DateCalc.prototype.parseNumber = function (string) {
-	console.log(string)
-   return parseInt(string, 10);
+	/* Using this instead of parseInt to accomodate floats */
+	return +string.match(/[\-\.0-9]/g).join('');
 }
 
 DateCalc.prototype.formatDate = function (dateObjOrTimestamp) {
@@ -96,7 +96,7 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     try {
     	input = new Date(inputDate);
     } catch (e) {
-    
+    	console.log(e);
     }
     
     num  = this.parseNumber(difference);
