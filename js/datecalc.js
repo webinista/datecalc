@@ -58,8 +58,7 @@ DateCalc.prototype.parseDateUnit = function (value) {
 
 DateCalc.prototype.parseNumber = function (string) {
 	/* Using this instead of parseInt to accomodate floats */
-	console.log(string);
-	// return +string.match(/[\-\.0-9]/g).join('');
+	return +string.match(/[\-\.0-9]/g).join('');
 }
 
 DateCalc.prototype.formatDate = function (dateObjOrTimestamp) {
