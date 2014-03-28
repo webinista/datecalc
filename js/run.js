@@ -26,7 +26,7 @@ addEvent(datecalc, 'submit', function(e){
     
     console.log(DCO.formatDate(future).local);
     
-    result.value = DCO.formatDate(future).local;
+    result.innerHTML = DCO.formatDate(future).local;
 });
 
 addEvent(window, 'load', function(e){

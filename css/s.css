@@ -24,6 +24,7 @@ h1 {
 
 form {
   margin: 2em auto;
+  font-size: 1.2em;
   font-size: 1.2rem; }
 
 input {
@@ -34,6 +35,7 @@ input {
     width: 100%;
     border: 1px solid #666666;
     box-shadow: none;
+    padding: .1em .25em .5em;
     padding: .1rem .25rem; }
     input[type=date]:focus, input[type=datetime]:focus, input[type=datetime-local]:focus, input[type=text]:focus {
       outline: none;
@@ -76,9 +78,10 @@ label {
   display: block; }
 
 .informative {
+  font-size: .8em;
   font-size: .8rem; }
 
-output {
+#result {
   display: block;
   font: inherit;
   background: #ffffcc;

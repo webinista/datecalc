@@ -29,6 +29,7 @@ h1{
 }
 form{
     margin: 2em auto;
+    font-size: 1.2em;
     font-size: 1.2rem;
 }
 input{
@@ -43,8 +44,8 @@ input{
         width:100%;
         border: 1px solid $darkBorder;
         box-shadow: none;
+        padding: .1em .25em .5em;
         padding: .1rem .25rem;
-        
         @include focus;  
     } 
 }
@@ -69,9 +70,10 @@ label{
 }
 
 .informative{
+    font-size: .8em;
     font-size: .8rem;
 }
-output{
+#result{
     display: block;
     font:inherit;
     background: $hilight;
