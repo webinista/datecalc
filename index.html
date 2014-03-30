@@ -12,6 +12,7 @@
 <body>
 	<header>
         <h1>Date calculator</h1>
+        <p>All dates are local.</p>
     </header>
 	<main>
 		<form id="datecalc">
@@ -21,7 +22,10 @@
             </p>
             <p>
                 <label for="difference">Add or subtract a time period</label>
-                <input type="text" id="difference" name="difference" placeholder="example: +30 days" value="" required>
+                <input type="text" id="difference" name="difference" 
+                        placeholder="example: +30 days" 
+                       value="" 
+                       pattern="(|\+|\-)[\.0-9]{1,} (seconds|minutes|hours|days|day|weeks|week|month|months|year|years)(|\s)" required>
                 <span class="informative">Example: 5 days, +30 days, -20 years</span>
             </p>
             <p>
@@ -38,8 +42,10 @@
     </p>
     </footer>
     <dialog></dialog>
+    
+<!-- <script src="js/dialog-polyfill.js"></script> -->
+<script src="js/utils.js"></script>
 <script src="js/datecalc.js"></script>
-<script src="js/dialog-polyfill.js"></script>
 <script src="js/run.js"></script>
 </body>
 </html>

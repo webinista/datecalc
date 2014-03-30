@@ -100,13 +100,9 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     var input, diff, num, unit, wks, d, Units = {};
     
 	input = new Date(inputDate);
-    
-  
-    
+
     num  = this.parseNumber(difference);
     unit = this.parseDateUnit(difference);
-    
-    console.log(num);
     
     /* Force plurals. */
     if (unit !== undefined && unit.indexOf('s') < 0) {
