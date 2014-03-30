@@ -58,9 +58,15 @@ DateCalc.prototype.parseDateUnit = function (value) {
 
 DateCalc.prototype.parseNumber = function (string) {
 	/* Using this instead of parseInt to accomodate floats */
-    var amount = string.match(/[\-\.0-9]/g);   
+    // var amount = string.match(/[\-\.0-9]/g); 
+    /* 
+    Going back to parseInt until we have though out issue 12. 
+    https://github.com/webinista/datecalc/issues/12
+    */
+    var amount = parseInt(string,10);
 	if(amount){
-        return +amount.join('');
+        // return +amount.join('');
+        return amount;
     } else {
         return false;
     }
@@ -104,6 +110,8 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     num  = this.parseNumber(difference);
     unit = this.parseDateUnit(difference);
     
+    console.log(num);
+    
     /* Force plurals. */
     if (unit !== undefined && unit.indexOf('s') < 0) {
         unit += 's';
@@ -124,7 +132,9 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
             wks = Units.weeks * num;          
             Units.seconds = Units.seconds + wks;
         } else {
+            console.log(Units.months);
             Units[unit] = Units[unit] + num; 
+            
         } 
     } else {
         return false; 
