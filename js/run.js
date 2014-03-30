@@ -16,20 +16,20 @@ Utils.addEvent(datecalc, 'submit', function(e){
     
     today = !!startdate.valueAsNumber ? startdate.valueAsNumber : startdate.value;
         
-    try {
-        future = DCO.calculateDate(today, difference.value);
-        result.innerHTML = DCO.formatDate(future).local;
-    } catch (e) {
-        showError(e, startdate);   
-    }
+    future = DCO.calculateDate(today, difference.value);
+    result.innerHTML = DCO.formatDate(future).local;
 });
 
 Utils.addEvent(window, 'load', function(e){
     setToday(startdate);
 });
 
-Utils.addEvent(startdate, 'invalid', function(e){
-    console.log(e.detail.message);
+Utils.addEvent(difference, 'invalid', function(e){
+    if(e.target.validity.patternMismatch){
+        e.target.setCustomValidity('Please enter suitable time period, for example: "3 weeks" or "-100.5 hours."');   
+    } else {
+        e.target.setCustomValidity('');
+    }
 });
 
 setToday = function (updateField) {
@@ -48,23 +48,28 @@ setToday = function (updateField) {
     }
 }
 
-var showError = function(err, obj){
+window.onerror = function(e){
+    console.log('error!')   
+}
+var fireError = function(err, obj){
     var e, evtc, dict = {};
     
     dict.detail = {};
     dict.detail.message = err.message;
-   
+    
+    /* May be making invalid assumptions here, 
+       but it works in IE8 */
+    
     if ('oninvalid' in window) {
-        evtc = Object.prototype.toString.call(CustomEvent);
-        if( evtc == "[object Function]" || evtc == "[object CustomEventConstructor]"){          
-            e = new CustomEvent('invalid',dict);  
-        } else {
-            e = document.createEvent('Event');
-            e.detail = dict.detail;
-            e.initEvent('invalid',false,false);
-        }
-        startdate.dispatchEvent(e);
+        e = document.createEvent('Event');
+        e.detail = dict.detail;
+        e.initEvent('invalid',false,false);
+        difference.dispatchEvent(e);
     } else {
-        console.log(err.message);
+        showError(err.message);
     }
+}
+
+var showError = function (message) {
+    console.log(err.message);
 }

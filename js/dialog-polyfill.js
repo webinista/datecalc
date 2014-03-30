@@ -182,7 +182,7 @@ var dialogPolyfill = (function() {
     this.overlay.style.position = 'fixed';
     this.overlay.style.left = '0px';
     this.overlay.style.top = '0px';
-    this.overlay.style.backgroundColor = 'rgba(0,0,0,0.0)';
+    this.overlay.style.backgroundColor = 'rgb(0,0,0)';
 
     addEventListenerFn(this.overlay, 'click', function(e) {
       var redirectedEvent = document.createEvent('MouseEvents');
