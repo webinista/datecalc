@@ -5,29 +5,31 @@ result = document.getElementById('result');
 difference = document.getElementById('difference');
 datecalc = document.getElementById('datecalc');
 
-var addEvent = function(obj, evt, method){
-	if(window.attachEvent) {
-		obj.attachEvent('on'+evt, method);
-	} else {
-		obj.addEventListener(evt, method, false);
-	}
-}
- 
-addEvent(datecalc, 'submit', function(e){
+Utils.addEvent(datecalc, 'submit', function(e){
     var today, future;
-    if( e.preventDefault){
+    
+    if(e.preventDefault){
     	e.preventDefault();
     } else {
     	e.returnValue = false;
     }
+    
     today = !!startdate.valueAsNumber ? startdate.valueAsNumber : startdate.value;
         
-    future = DCO.calculateDate(today, difference.value);
-    result.innerHTML = DCO.formatDate(future).local;
+    try {
+        future = DCO.calculateDate(today, difference.value);
+        result.innerHTML = DCO.formatDate(future).local;
+    } catch (e) {
+        showError(e, startdate);   
+    }
 });
 
-addEvent(window, 'load', function(e){
+Utils.addEvent(window, 'load', function(e){
     setToday(startdate);
+});
+
+Utils.addEvent(startdate, 'invalid', function(e){
+    console.log(e.detail.message);
 });
 
 setToday = function (updateField) {
@@ -46,3 +48,23 @@ setToday = function (updateField) {
     }
 }
 
+var showError = function(err, obj){
+    var e, evtc, dict = {};
+    
+    dict.detail = {};
+    dict.detail.message = err.message;
+   
+    if ('oninvalid' in window) {
+        evtc = Object.prototype.toString.call(CustomEvent);
+        if( evtc == "[object Function]" || evtc == "[object CustomEventConstructor]"){          
+            e = new CustomEvent('invalid',dict);  
+        } else {
+            e = document.createEvent('Event');
+            e.detail = dict.detail;
+            e.initEvent('invalid',false,false);
+        }
+        startdate.dispatchEvent(e);
+    } else {
+        console.log(err.message);
+    }
+}

@@ -58,7 +58,12 @@ DateCalc.prototype.parseDateUnit = function (value) {
 
 DateCalc.prototype.parseNumber = function (string) {
 	/* Using this instead of parseInt to accomodate floats */
-	return +string.match(/[\-\.0-9]/g).join('');
+    var amount = +string.match(/[\-\.0-9]/g);
+	if(amount){
+        return amount.join('');
+    } else {
+        return false;
+    }
 }
 
 DateCalc.prototype.formatDate = function (dateObjOrTimestamp) {
@@ -74,12 +79,12 @@ DateCalc.prototype.formatDate = function (dateObjOrTimestamp) {
     if (Object.prototype.toString.call(dateObjOrTimestamp) !== '[object Date]'){
         dateObjOrTimestamp = new Date(dateObjOrTimestamp);
     }
+    
     local[0] = days[dateObjOrTimestamp.getDay()]+',';
     local[1] = months[dateObjOrTimestamp.getMonth()];
     local[2] = dateObjOrTimestamp.getDate()+',';
     utc[3] = local[3] = dateObjOrTimestamp.getFullYear();
       
- 
     utc[0] = days[dateObjOrTimestamp.getUTCDay()]+',';
     utc[1] = months[dateObjOrTimestamp.getUTCMonth()];
     utc[2] = dateObjOrTimestamp.getUTCDate()+',';
@@ -105,11 +110,10 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     unit = this.parseDateUnit(difference);
     
     if (isNaN(num) || unit === undefined) {
-        throw new TypeError('Please enter a number and unit of measure, for example "3 weeks."');
+        throw new TypeError('Please enter a number and unit of time, for example "3 weeks."');
     } 
-   
     
-    /* Test for and force a plural. */
+    /* Force plurals. */
     if (unit.indexOf('s') < 0) {
         unit += 's';
     }
@@ -123,13 +127,6 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     Units.seconds   =  input.getUTCSeconds();
     Units.milliseconds  =  input.getUTCMilliseconds();
     
-    /* 
-    TO DO:
-    Input of '9000 seconds' fails.
-    Seconds bug is about type. We always have 0 seconds.
-    So how to convert this so that it's true or false, not
-    truthy or falsy?
-    */
     if (Units[unit] !== undefined) {
         if ( /week/.test(unit) ) {           
             /* Multiply week "constant" by number of them */

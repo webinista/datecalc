@@ -18,15 +18,16 @@ header,main,footer{
 }
 header{
     margin-top:2em;
+    h1,p{
+        margin: 0;
+    }
 }
 footer{
     margin-bottom: 3em;
     font-size: .8rem;
     text-align: right
 }
-h1{
-    margin: 0;
-}
+
 form{
     margin: 2em auto;
     font-size: 1.2em;
