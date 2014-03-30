@@ -105,7 +105,7 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     unit = this.parseDateUnit(difference);
     
     /* Force plurals. */
-    if (unit.indexOf('s') < 0) {
+    if (unit !== undefined && unit.indexOf('s') < 0) {
         unit += 's';
     }
     
