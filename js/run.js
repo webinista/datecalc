@@ -35,7 +35,7 @@ Utils.addEvent(difference, 'invalid', function(e){
 setToday = function (updateField) {
 	var d, now = new Date(), date = []; 
     if( updateField.type == 'text'){
-    
+        
         date[0] = DCO.zeroPadLeft( 1 + now.getMonth() );
         date[1] = DCO.zeroPadLeft( now.getDate() );
         date[2] = now.getFullYear();

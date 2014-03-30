@@ -41,7 +41,7 @@ DateCalc.prototype.zeroPadLeft = function(input, length){
     
     arguments[1] ? len = arguments[1] : len = 2;
     
-    extract = -len;
+    extract = len;
 
     while(len--){
         pad += zero;
@@ -49,7 +49,7 @@ DateCalc.prototype.zeroPadLeft = function(input, length){
         
     padded = pad + input;
     
-    return padded.substr(extract);
+    return padded.substr(padded.length - extract);
 }
 
 DateCalc.prototype.parseDateUnit = function (value) {
@@ -109,9 +109,7 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
 
     num  = this.parseNumber(difference);
     unit = this.parseDateUnit(difference);
-    
-    console.log(num);
-    
+  
     /* Force plurals. */
     if (unit !== undefined && unit.indexOf('s') < 0) {
         unit += 's';
@@ -132,9 +130,7 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
             wks = Units.weeks * num;          
             Units.seconds = Units.seconds + wks;
         } else {
-            console.log(Units.months);
-            Units[unit] = Units[unit] + num; 
-            
+            Units[unit] = Units[unit] + num;  
         } 
     } else {
         return false; 
