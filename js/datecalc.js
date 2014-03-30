@@ -101,17 +101,8 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     
 	input = new Date(inputDate);
     
-    if(input == 'Invalid Date' || isNaN(input) === true) {
-    	throw new TypeError('Please enter a valid date.');
-    	return;
-    }
-    
     num  = this.parseNumber(difference);
     unit = this.parseDateUnit(difference);
-    
-    if (isNaN(num) || unit === undefined) {
-        throw new TypeError('Please enter a number and unit of time, for example "3 weeks."');
-    } 
     
     /* Force plurals. */
     if (unit.indexOf('s') < 0) {
@@ -136,7 +127,7 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
             Units[unit] = Units[unit] + num; 
         } 
     } else {
-        throw new TypeError('Units must be year(s), month(s), week(s), day(s), hour(s), minute(s), or second(s), for example: -3 weeks.');  
+        return false; 
     }
     
     d = new Date(Units.years, Units.months, Units.days, Units.hours, Units.minutes, Units.seconds, Units.milliseconds);
