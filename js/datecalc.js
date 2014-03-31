@@ -26,12 +26,14 @@ SOFTWARE.
 /* 
 TO DOs:
  - Make it into a reusable class.
- - Attempt to fix start date so that it's local time, not UTC.
  - Add error display. 
  - Make this work in IE8.
+ - Make month, day names configurable.
 */
 
-var DateCalc = function(){}
+var DateCalc = function(){
+    
+}
 
 DateCalc.prototype.zeroPadLeft = function(input, length){
     var zero = '0', pad = '', len, padded, inp, extract;
