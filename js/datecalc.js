@@ -74,8 +74,7 @@ var DateCalc = function(){
             enumerable: true,
             writeable: false,
             get: function(){return 30 * 24 * 60 * 60 * 1000;}
-        }
-        
+        }      
     })
 }
 
@@ -147,7 +146,7 @@ DateCalc.prototype.formatDate = function (dateObjOrTimestamp) {
     };
 }
 
-/* Does the heavy lifting */
+/* Adds and subtracts dates. */
 DateCalc.prototype.calculateDate = function (inputDate, difference) {
     var input, diff, num, unit, wks, d, Units = {};
     
@@ -163,8 +162,6 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     
     var today = new Date();
     
-    
-    Units['from today'] = (today - input) / this.MILLISEC_IN_DAY;
     Units.years     =  input.getFullYear();
     Units.months    =  input.getUTCMonth();
     Units.weeks     =  (60 * 60 * 24 * 7)
@@ -174,14 +171,6 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     Units.seconds   =  input.getUTCSeconds();
     Units.milliseconds  =  input.getUTCMilliseconds();
  
-    /* if( Units['from today'] < 0  ) {
-        console.log( Math.ceil(Units['from today']) );
-    } else {
-        console.log( Math.floor(Units['from today']) );
-    } */
-    
-    console.log( Math.floor(Units['from today']) );
-    
     if (Units[unit] !== undefined) {
         if ( /week/.test(unit) ) {           
             /* Multiply week "constant" by number of them */
@@ -196,6 +185,19 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     
     d = new Date(Units.years, Units.months, Units.days, Units.hours, Units.minutes, Units.seconds, Units.milliseconds);
     return d.getTime();
+}
+
+/* Calculate number of days between two given dates */
+DateCalc.prototype.calculateDays = function (startdate, enddate) {
+    var start, end, days;
+    
+	start = new Date(startdate);
+    end = new Date(enddate);
+   
+    days = (start - end) / this.MILLISEC_IN_DAY;
+   
+    return Math.ceil(days);
+    
 }
 
 
