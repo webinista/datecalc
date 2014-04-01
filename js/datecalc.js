@@ -195,9 +195,8 @@ DateCalc.prototype.calculateDays = function (startdate, enddate) {
     end = new Date(enddate);
    
     days = (start - end) / this.MILLISEC_IN_DAY;
-   
-    return Math.ceil(days);
-    
+
+    return Math.floor(days);
 }
 
 
