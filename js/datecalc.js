@@ -32,7 +32,17 @@ TO DOs:
 */
 
 var DateCalc = function(){
-    
+
+    Object.defineProperty(this, 'DAYS', {
+        configurable: true,
+        enumerable: true,
+        value: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+    });
+    Object.defineProperty(this,'MONTHS',{
+        configurable: true,
+        enumerable: true,
+        value: ['January','February','March','April','May','June','July','August','September','October','November','December']
+    }); 
 }
 
 DateCalc.prototype.zeroPadLeft = function(input, length){
@@ -81,9 +91,9 @@ DateCalc.prototype.formatDate = function (dateObjOrTimestamp) {
      Make this into a configurable/configuration object
     */
     
-    days = ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'];
-    months = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-        
+    days = this.DAYS;
+    months = this.MONTHS;
+    
     if (Object.prototype.toString.call(dateObjOrTimestamp) !== '[object Date]'){
         dateObjOrTimestamp = new Date(dateObjOrTimestamp);
     }
