@@ -161,6 +161,10 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
         unit += 's';
     }
     
+    var today = new Date();
+    
+    
+    Units['from today'] = (today - input) / this.MILLISEC_IN_DAY;
     Units.years     =  input.getFullYear();
     Units.months    =  input.getUTCMonth();
     Units.weeks     =  (60 * 60 * 24 * 7)
@@ -169,6 +173,14 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
     Units.minutes   =  input.getUTCMinutes();
     Units.seconds   =  input.getUTCSeconds();
     Units.milliseconds  =  input.getUTCMilliseconds();
+ 
+    /* if( Units['from today'] < 0  ) {
+        console.log( Math.ceil(Units['from today']) );
+    } else {
+        console.log( Math.floor(Units['from today']) );
+    } */
+    
+    console.log( Math.floor(Units['from today']) );
     
     if (Units[unit] !== undefined) {
         if ( /week/.test(unit) ) {           
