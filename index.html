@@ -18,14 +18,14 @@
 		<form id="datecalc">
             <p>
                 <label for="startdate">Enter a date</label>
-                <input type="date" id="startdate" name="startdate">
+                <input type="date" id="startdate" name="startdate" value="2014-04-01">
             </p>
             <p>
                 <label for="difference">Add or subtract a time period</label>
                 <input type="text" id="difference" name="difference" 
-                        placeholder="example: +30 days" 
-                       value="" 
-                       pattern="(|\+|\-)[0-9]{1,} (seconds|minutes|hours|days|day|weeks|week|month|months|year|years)(|\s)" required>
+                       placeholder="example: +30 days" 
+                       value="from today" 
+                       pattern="from today|(|\+|\-)[0-9]{1,} (seconds|minutes|hours|days|day|weeks|week|month|months|year|years)(|\s)" required>
                 <span class="informative">Example: 5 days, +30 days, -20 years</span>
             </p>
             <p>
