@@ -1,10 +1,12 @@
-var startdate, result, difference, datecalc, DCO = new DateCalc();
+var startdate, result, difference, datecalc, DCO;
 
 startdate  = document.getElementById('startdate');
 result = document.getElementById('result');
 difference = document.getElementById('difference');
 datecalc = document.getElementById('datecalc');
 
+DCO = new DateCalc(startdate.valueAsDate, difference.value);
+ 
 Utils.addEvent(datecalc, 'submit', function(e){
     var today, future;
     

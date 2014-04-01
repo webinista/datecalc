@@ -28,7 +28,6 @@ TO DOs:
  - Make it into a reusable class.
  - Add error display. 
  - Make this work in IE8.
- - Make month, day names configurable.
 */
 
 var DateCalc = function(){
@@ -38,11 +37,46 @@ var DateCalc = function(){
         enumerable: true,
         value: ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
     });
+    
     Object.defineProperty(this,'MONTHS',{
         configurable: true,
         enumerable: true,
         value: ['January','February','March','April','May','June','July','August','September','October','November','December']
-    }); 
+    });
+    
+    Object.defineProperties(this, {
+        'MILLISEC_IN_SECOND': {
+            value: 1000,
+            enumerable: true,
+            writeable: false
+        },
+        'MILLISEC_IN_MINUTE': {
+            enumerable: true,
+            writeable: false,
+            get: function(){return 60 * 1000;}
+        },
+        'MILLISEC_IN_HOUR': {
+            enumerable: true,
+            writeable: false,
+            get: function(){return 60 * 60 * 1000;}
+        },
+        'MILLISEC_IN_DAY': {
+            enumerable: true,
+            writeable: false,
+            get: function(){return 24 * 60 * 60 * 1000;}
+        },
+        'MILLISEC_IN_WEEK': {
+            enumerable: true,
+            writeable: false,
+            get: function(){return 7 * 24 * 60 * 60 * 1000;}
+        },
+        'MILLISEC_IN_30_DAYS': {
+            enumerable: true,
+            writeable: false,
+            get: function(){return 30 * 24 * 60 * 60 * 1000;}
+        }
+        
+    })
 }
 
 DateCalc.prototype.zeroPadLeft = function(input, length){
@@ -77,7 +111,7 @@ DateCalc.prototype.parseNumber = function (string) {
     */
     var amount = parseInt(string,10);
 	if(amount){
-        // return +amount.join('');
+    // return +amount.join('');
         return amount;
     } else {
         return false;
