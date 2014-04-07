@@ -5,7 +5,7 @@ result = document.getElementById('result');
 difference = document.getElementById('difference');
 datecalc = document.getElementById('datecalc');
 
-DCO = new DateCalc(startdate.valueAsDate, difference.value);
+DCO = new DateCalc();
  
 Utils.addEvent(datecalc, 'submit', function(e){
     var today, future;
@@ -18,8 +18,13 @@ Utils.addEvent(datecalc, 'submit', function(e){
     
     today = !!startdate.valueAsNumber ? startdate.valueAsNumber : startdate.value;
         
-    future = DCO.calculateDate(today, difference.value);
-    result.innerHTML = DCO.formatDate(future).local;
+    if(/from today/.test(difference.value)){
+    	future = DCO.calculateDays(Date.now(), today);
+   		result.innerHTML = future;
+    } else {    
+    	future = DCO.calculateDate(today, difference.value);
+   		result.innerHTML = DCO.formatDate(future).local;
+   	}
 });
 
 Utils.addEvent(window, 'load', function(e){

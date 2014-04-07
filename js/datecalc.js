@@ -189,14 +189,24 @@ DateCalc.prototype.calculateDate = function (inputDate, difference) {
 
 /* Calculate number of days between two given dates */
 DateCalc.prototype.calculateDays = function (today, otherdate) {
-    var start, end, days;
+    var start, end, days, diff;
     
 	start = new Date(today);
     end = new Date(otherdate);
-   
+
     days = (start - end) / this.MILLISEC_IN_DAY;
-    
-    return Math.floor(days);
+  
+  	/* 
+  	If the number is negative, Math.floor actually 
+  	rounds up and Math.ceil rounds down.
+  	IOW:
+  	Math.floor(-1.5) = -2
+  	Math.ceil(-1.5)  = -1
+  	*/
+  	
+  	diff = (days > 0) ? Math.ceil(days) : Math.floor(days);
+     
+    return diff;
 }
 
 
